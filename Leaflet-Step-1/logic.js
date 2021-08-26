@@ -7,18 +7,48 @@ d3.json(queryUrl).then(function (data) {
   createFeatures(data.features);
 });
 
+var markerSize = 0.0;
+
+//return color based on value
+function getColor(x) {
+  return x > 11 ? "#ea1212" :
+    x > 10 ? "#f43302" :
+      x > 9 ? "#f46402" :
+        x > 8 ? "#f2ab23" :
+          x > 7 ? "#c1f402" :
+            x > 6 ? "#39e71e" :
+              "#ceffa0";
+}
 function createFeatures(earthquakeData) {
 
-  // Define a function that we want to run once for each feature in the features array.
-  // Give each feature a popup that describes the place and time of the earthquake.
-  function onEachFeature(feature, layer) {
-    layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p>`);
+  // style function
+  function style(feature) {
+    return {
+      color: "black",
+      fillColor: getColor(feature.geometry.coordinates[2]),
+      fillOpacity: 0.85,
+      opacity: 1,
+      weight: 1,
+      stroke: true,
+      radius: +feature.properties.mag * 4.5
+    };
   }
-
   // Create a GeoJSON layer that contains the features array on the earthquakeData object.
-  // Run the onEachFeature function once for each piece of data in the array.
-  var earthquakes = L.geoJSON(earthquakeData, {
-    onEachFeature: onEachFeature
+  var earthquakes = L.geoJson(earthquakeData, {
+
+    pointToLayer: function (feature, latlng) {
+
+      //console.log("markersize: "+markerSize);
+      //return L.circleMarker(latlng,  geojsonMarkerOptions );
+      return L.circleMarker(latlng, style(feature));
+    },
+    // Run the onEachFeature function once for each piece of data in the array.
+    // Define a function that we want to run once for each feature in the features array.
+    // Give each feature a popup that describes the place, magnitude, and time of the earthquake.
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><h4> Magnitude: ${feature.properties.mag}</h4><p>${new Date(feature.properties.time)}</p>`);
+    }
+
   });
 
   // Send our earthquakes layer to the createMap function/
@@ -62,5 +92,26 @@ function createMap(earthquakes) {
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
+
+//add legend
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+    limits = [0, 5, 6, 7, 8, 9, 10, 11],
+    //colors = getColor(feature.geometry.coordinates[2]),
+    labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < limits.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(limits[i] + 1) + '"></i> ' +
+            limits[i] + (limits[i + 1] ? '&ndash;' + limits[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(myMap);
 
 }
