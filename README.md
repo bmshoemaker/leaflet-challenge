@@ -12,7 +12,7 @@ The USGS is interested in building a new set of tools that will allow them to vi
 
 ### Level 1: Basic Visualization
 
-![2-BasicMap](Images/2-BasicMap.png)
+![MyMap](Images/MyMap.png)
 
 For this homework, my first task was to visualize an earthquake data set.
 
