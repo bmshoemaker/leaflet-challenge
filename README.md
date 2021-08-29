@@ -16,7 +16,7 @@ The USGS is interested in building a new set of tools that will allow them to vi
 
 For this homework, my first task was to visualize an earthquake data set.
 
-1. **Get your data set**
+1. **Getthing the Dataset**
 
    ![3-Data](Images/3-Data.png)
 
