@@ -93,19 +93,34 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
+  function getColor(x) {
+    return x > 12 ? "#ea1212" :
+      x > 10 ? "#f43302" :
+        x > 8 ? "#f46402" :
+          x > 6 ? "#f2ab23" :
+            x > 4 ? "#c1f402" :
+              x > 2 ? "#39e71e" :
+                "#ceffa0";
+  }
 //add legend
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
       grades = [0, 2, 4, 6, 8, 10, 12],
-      colors = ["#ceffa0", "#39e71e", "#c1f402", "#f2ab23", "#f46402", "#f43302", "#ea1212"];
-  // loop through our density intervals and generate a label with a colored square for each interval
-  for (var i = 0; i < grades.length; i++) {
-      div.innerHTML +=
-          '<i style="background:' + colors[i] + '"></i> ' +
-          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      labels = [];
+
+      div.innerHTML+='Depth<br><hr>'
+  
+      // loop through our density intervals and generate a label with a colored square for each interval
+      for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + getColor(grades[i] + 1) + '">&nbsp&nbsp&nbsp&nbsp</i> ' +
+              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
   }
+  
   return div;
-};
-legend.addTo(myMap);
+  };
+  
+  legend.addTo(myMap);
+
 }
