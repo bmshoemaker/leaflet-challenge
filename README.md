@@ -8,7 +8,7 @@ Welcome to the United States Geological Survey, or USGS for short. The USGS is r
 
 The USGS is interested in building a new set of tools that will allow them to visualize their earthquake data. They collect a massive amount of data from all over the world each day, but they lack a meaningful way of displaying it. Their hope is that being able to visualize their data will allow them to better educate the public and other government organizations (and hopefully secure more funding) on issues facing our planet.
 
-## Your Task
+## My Task
 
 ### Level 1: Basic Visualization
 
@@ -26,17 +26,13 @@ The data used for this map was the past 2.5 months of earthquakes data from the 
 
 2. **Import & Visualize the Data**
 
-   Create a map using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude.
+   A map was created using Leaflet that plots all of the earthquakes from my data set based on their longitude and latitude.
 
-   * Your data markers should reflect the magnitude of the earthquake by their size and and depth of the earthquake by color. Earthquakes with higher magnitudes should appear larger and earthquakes with greater depth should appear darker in color.
+   * The data markers reflect the magnitude of the earthquake by their size and and depth of the earthquake by color. Earthquakes with higher magnitudes appear larger and earthquakes with greater depth appear darker in color.
 
-   * **HINT:** The depth of the earth can be found as the third coordinate for each earthquake.
+   * The popups provide additional information about the earthquake when a marker is clicked.
 
-   * Include popups that provide additional information about the earthquake when a marker is clicked.
-
-   * Create a legend that will provide context for your map data.
-
-   * Your visualization should look something like the map above.
+   * A legend that provides context for your map data.
 
 - - -
 
