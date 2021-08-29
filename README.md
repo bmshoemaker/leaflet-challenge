@@ -32,7 +32,7 @@ The data used for this map was the past 2.5 months of earthquakes data from the 
 
    * The popups provide additional information about the earthquake when a marker is clicked.
 
-   * A legend that provides context for your map data.
+   * A legend that provides context for the map data.
 
 - - -
 
